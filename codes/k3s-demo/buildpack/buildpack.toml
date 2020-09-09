@@ -1,0 +1,11 @@
+# Buildpack API version
+api = "0.2"
+
+# Buildpack ID and metadata
+[buildpack]
+id = "buildpacks.k3s.demo"
+version = "0.0.1"
+name = "K3s Demo Buildpack"
+
+[[stacks]]
+id = "io.buildpacks.samples.stacks.bionic"

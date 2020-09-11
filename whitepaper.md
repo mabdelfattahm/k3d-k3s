@@ -336,7 +336,7 @@ nano builder.yaml
 #   namespace: default
 # spec:
 #   serviceAccount: service-account
-#   tag: mofattah.jfrog.io/docker-quickstart/sample-buildr
+#   tag: mofattah.jfrog.io/docker-quickstart/sample-builder
 #   stack:
 #     name: base
 #     kind: ClusterStack
@@ -394,3 +394,5 @@ kubectl logs -n kpack $(kubectl get pod -n kpack | grep Running | head -n1 | awk
   > "error": "Operation cannot be fulfilled on builds.kpack.io 'IMAGE': the object has been modified; please apply your changes to the latest version and try again
 - Documentation is straight forward, but there is no good support section
 - Cannot seem to get the log utility to work
+
+## Serverless technologies

@@ -1,0 +1,14 @@
+{
+  "name": "helloworld-nodejs",
+  "version": "1.0.0",
+  "description": "Hello world example using NodeJs for Knative deployment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "m_afattah",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

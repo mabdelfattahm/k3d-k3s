@@ -1,2 +1,4 @@
 codes/kpack/logs
 codes/kpack/kpack.yaml
+codes/knative/kn-linux-amd64
+codes/node-knative/node_modules

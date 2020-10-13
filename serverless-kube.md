@@ -73,6 +73,22 @@ Kubeless is also a Kubernetes-native serverless framework that eases the develop
 
 Kubeless offers the best developer experience with a command line tool that's similar to Amazon Lambda CLI.  It also provides Prometheus monitoring of functions calls and latency.
 
+## OpenFaas's Faasd
+
+The ability to scale down to zero is of a great benefit to lower down costs, imagine we want to run some code to send an email or to upload a file when a user signs up or every now and then, we don't need to have this functionalities running forever, we need to be able to completely shut down these functions and only run it when we need it. Of all the projects mentioned, only Knative and OpenFaas have the this ability.
+
+However, a prober Kubernetes based deployment would require Virtual machines, Kubernetes, Container registry, Ingress controller, Load balancer, CertManager, as well as Helm, probably Flux for Git operations, a CI server, Docker for building images, Prometheus + Grafana for monitoring, and lastly knative or OpenFaas, application code and a decent DevOps team. Some would actually argue that Kubernetes is not suitable for serverless and there's probably a lot of cost to manage a Kubernetes cluster to run few functions.
+
+Faasd is a re-imagination of OpenFaas without the cost and complexity of Kubernetes. It uses containerd and container network interface as well as OpenFaas's core components (UI, metrics, secrets), but with cost of only being able to run on a single node with a single ReplicaSet.
+
+### When to use faasd over OpenFaaS on Kubernetes
+
+- A cost sensitive project
+- A few functions or microservices, without the cost of a cluster
+- No bandwidth to learn or manage Kubernetes
+- Deploy embedded apps in IoT and edge use-cases
+- Shrink-wrap applications for use with a customer or client
+
 ## Demos
 
 ### Knative Demo
@@ -146,5 +162,23 @@ kn service update hello-world --revision-name hello-world-3 --tag hello-world-3=
 locust -f knative/normal-hello.py --host http://hello-world.default.127.0.0.1.nip.io:31080 --headless -u 100 -r 10 -t 1m
 # curl from special url using the tag
 curl http://hw3-hello-world.default.127.0.0.1.nip.io:31080
-
 ```
+
+### OpenFaas Demo
+
+``` Powershell
+multipass launch -n k3s-openfaas
+multipass shell k3s-openfaas
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE='644' sh -
+mkdir .kube
+cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo snap install helm3
+kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+helm3 repo add openfaas https://openfaas.github.io/faas-netes/
+helm3 repo update
+helm3 upgrade openfaas --install openfaas/openfaas --namespace openfaas  --set functionNamespace=openfaas-fn --set generateBasicAuth=true
+```
+
+### Fission Demo
+
+### Kubeless Demo
